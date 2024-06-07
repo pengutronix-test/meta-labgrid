@@ -23,7 +23,7 @@ jobs:
         with:
           path: meta-labgrid
       - name: Clone poky
-        run: git clone -b master git://git.yoctoproject.org/poky
+        run: git clone -b master https://git.yoctoproject.org/poky
       - name: Clone meta-openembedded
         run: git clone -b master https://github.com/openembedded/meta-openembedded.git
       - name: Initialize build directory
