@@ -1,11 +1,7 @@
 name: meta-labgrid CI
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
   push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
@@ -37,6 +33,10 @@ jobs:
           echo 'SSTATE_MIRRORS = "file://.* http://195.201.147.117/sstate-cache/PATH"' >> conf/local.conf
           echo 'BB_SIGNATURE_HANDLER = "OEBasicHash"' >> conf/local.conf
           echo 'BB_HASHSERVE = ""' >> conf/local.conf
+      - name: Build usbmuxctl
+        run: |
+          source poky/oe-init-build-env build
+          bitbake python3-usbmuxctl
       - name: Build autobahn
         run: |
           source poky/oe-init-build-env build
@@ -53,10 +53,6 @@ jobs:
         run: |
           source poky/oe-init-build-env build
           bitbake python3-lxa-iobus
-      - name: Build usbmuxctl
-        run: |
-          source poky/oe-init-build-env build
-          bitbake python3-usbmuxctl
       - name: Build usbsdmux
         run: |
           source poky/oe-init-build-env build
